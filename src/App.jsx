@@ -15,7 +15,7 @@ function App() {
     const [showSplash, setShowSplash] = useState(true);
 
     useEffect(() => {
-        document.title = "Noreeta Store";
+        document.title = "Noreta Store";
 
         const timer = setTimeout(() => setShowSplash(false), 5000); // 5 ثواني
         return () => clearTimeout(timer);

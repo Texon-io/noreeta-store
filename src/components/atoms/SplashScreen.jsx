@@ -2,53 +2,56 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function SplashScreen() {
-    const [fadeOut, setFadeOut] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-        // بعد 4 ثواني، نبدأ fade-out
-        const timer = setTimeout(() => setFadeOut(true), 4000);
+        // العرض لمدة 3 ثوانٍ شاملة الحركات
+        const timer = setTimeout(() => setIsVisible(false), 3000);
         return () => clearTimeout(timer);
     }, []);
 
     return (
         <AnimatePresence>
-            <motion.div
-                className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white"
-                initial={{ opacity: 1 }}
-                animate={{ opacity: fadeOut ? 0 : 1 }}
-                transition={{ duration: 1, ease: "easeInOut" }} // fade-out تدريجي لمدة ثانية
-            >
-                <motion.h1
-                    className="text-3xl font-bold text-accent-dark"
-                    initial={{ y: 20, opacity: 0, scale: 0.9 }}
-                    animate={{ y: 0, opacity: 1, scale: 1 }}
-                    transition={{ duration: 1.2, ease: "easeInOut" }}
-                >
-                    Noreeta Store
-                </motion.h1>
-
-                {/* subtle animated dots */}
+            {isVisible && (
                 <motion.div
-                    className="flex space-x-2 mt-4"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 1 }}
+                    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white"
+                    initial={{ opacity: 1 }}
+                    // التلاشي بنعومة مع تكبير خفيف جداً لإعطاء إحساس بالعمق
+                    exit={{
+                        opacity: 0,
+                        scale: 1.05,
+                        transition: { duration: 1.2, ease: "easeInOut" }
+                    }}
                 >
-                    {[0, 0.2, 0.4].map((delay, index) => (
-                        <motion.div
-                            key={index}
-                            className="w-2 h-2 bg-accent-main-light rounded-full"
-                            animate={{ y: [0, -8, 0] }}
+                    {/* لمسة لونية هادئة جداً في الخلفية */}
+                    <div className="absolute w-[400px] h-[400px] bg-secondary/5 blur-[120px] rounded-full" />
+
+                    <div className="relative flex flex-col items-center">
+                        {/* ظهور الاسم بنعومة فائقة */}
+                        <motion.h1
+                            className="font-heading text-5xl md:text-7xl text-accent-dark font-bold tracking-tight"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{
-                                repeat: Infinity,
-                                duration: 0.8,
-                                ease: "easeInOut",
-                                delay,
+                                duration: 1.5,
+                                ease: [0.22, 1, 0.36, 1]
                             }}
-                        />
-                    ))}
+                        >
+                            Noreta
+                        </motion.h1>
+
+                        {/* سطر بسيط يظهر بعد الاسم */}
+                        <motion.p
+                            className="mt-6 text-main-text/60 font-body text-xs tracking-[0.5em] uppercase"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 1, duration: 1.2 }}
+                        >
+                            The Art of Gifting
+                        </motion.p>
+                    </div>
                 </motion.div>
-            </motion.div>
+            )}
         </AnimatePresence>
     );
 }
