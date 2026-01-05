@@ -13,7 +13,7 @@ function ListItem({
     return (
       <li className="flex flex-col items-center gap-3">
         <div className={`${iconStyle} p-3`}>{children}</div>
-        <h5 className="opacity-80 text-accent-dark-2 font-semibold">
+        <h5 className="opacity-80 text-main-text font-semibold">
           {headTitle}
         </h5>
       </li>
@@ -27,7 +27,7 @@ function ListItem({
       <div className="flex flex-col gap-1 font-medium">
         <h5 className="opacity-80">{headTitle}</h5>
         {bodyTitle && (
-          <p className="text-accent-dark-2 font-semibold tracking-wider">
+          <p className="text-main-text  font-semibold tracking-wider">
             {bodyTitle}
           </p>
         )}

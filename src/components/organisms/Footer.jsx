@@ -15,10 +15,10 @@ function Footer() {
         <FooterSocials />
         <SecDivider pos="bottom-0" />
       </div>
-      <div className="text-center my-4 pt-4 text-sm text-[#70453F]/70">
+      <div className="text-center my-4 pt-4 text-sm ">
         <p>
             <span>© {new Date().getFullYear()} نوريتا ستور. كل الحقوق محفوظة. </span> —
-            <a target={'_blank'} href={`https://texon-dev.netlify.app/`}> Made by <span className={`text-[#70453F] font-semibold underline underline-offset-2`}>Texon</span> Team</a>
+            <a target={'_blank'} href={`https://texon-dev.netlify.app/`}> Made by <span className={`text-accent-dark opacity-70 hover:opacity-100 transition-colors duration-300 font-semibold underline underline-offset-2`}>Texon</span> Team</a>
 
         </p>
 
