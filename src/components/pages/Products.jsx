@@ -78,8 +78,8 @@ function Products() {
 
       <div className="p-6 px-8 mt-14">
         {/* Products Header */}
-        <div className="flex max-sm:flex-col justify-between items-start sm:items-center px-2.5 my-4">
-          <LogoWord className="text-4xl text-accent-dark-2">منتجاتنا</LogoWord>
+        <div className="flex max-sm:flex-col justify-between items-start sm:items-center my-4">
+          <LogoWord className="text-4xl text-accent-dark">منتجاتنا</LogoWord>
           {!isLoading && (
             <CategoriesList
               categories={categories}
@@ -90,7 +90,7 @@ function Products() {
         </div>
 
         {/* Products List */}
-        <div className="products-list grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="products-list grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {isLoading
             ? Array.from({ length: itemsPerPage }).map((_, index) => (
                 <div key={index} className="w-full p-2 rounded-2xl">

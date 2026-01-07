@@ -1,10 +1,10 @@
-function NavIcon({ onClick, src, className, children }) {
+function NavIcon({ onClick, src, icon, className, children }) {
   return (
     <div
-      className={`nav-icons bg-secondary/15 p-1.5 rounded-lg pb-0 ${className || ""}`}
+      className={`nav-icons bg-secondary/25 hover:bg-accent-dark/25 transition-colors duration-300 p-1.5 rounded-lg pb-0 ${className || ""}`}
     >
       <button onClick={onClick} className={`cursor-pointer main-hover`}>
-        <img src={src} alt={`Menu icon`} width={28} height={28} />
+          {icon}
         {children}
       </button>
     </div>

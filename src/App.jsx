@@ -8,7 +8,7 @@ import HomePage from "./components/pages/HomePage.jsx";
 import Contact from "./components/pages/Contact.jsx";
 import Products from "./components/pages/Products.jsx";
 import ScrollToTop from "./utils/ScrollToTop.jsx";
-import SplashScreen from "./components/atoms/SplashScreen.jsx"; // السبلاش
+import SplashScreen from "./components/atoms/SplashScreen.jsx";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
                     <Navbar />
                     <ScrollToTop />
                     <main>
-                        <Toaster richColors position="top-center" />
+                        <Toaster dir={'rtl'} richColors position="top-right" />
                         <Routes>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/products" element={<Products />} />

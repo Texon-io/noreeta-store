@@ -11,11 +11,11 @@ function Button({
   to = "", // for path of link
 }) {
   // Base styles for all buttons
-  const base = `border-accent-dark border-2 px-4 py-3 font-medium text-lg rounded-xl cursor-pointer transition-all duration-300 m-1 shadow-lg hover:shadow-xl `;
+  const base = `border-accent-dark/50 hover:border-accent-dark border-2 px-4 py-3 font-medium text-lg rounded-xl cursor-pointer transition-all duration-300 m-1 shadow-lg hover:shadow-xl active:scale-95 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-accent-dark focus:ring-offset-2`;
 
   // Different visual variants
   const styles = {
-    main: base + " bg-accent-dark text-white opacity-95 hover:opacity-100",
+    main: base + " bg-accent-dark/90 hover:bg-accent-dark text-white opacity-95 hover:opacity-100",
     secondary: base + " text-accent-dark hover:bg-accent-dark hover:text-white",
     dark:
       base +

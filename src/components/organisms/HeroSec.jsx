@@ -39,7 +39,7 @@ const Hero = () => {
                 {/* الدائرة اللي ورا الصورة بستايل نوريتا */}
                 <div className="absolute w-72 h-72 lg:w-[450px] lg:h-[450px] rounded-full bg-secondary/30 blur-3xl"></div>
 
-                <div className="relative z-10 p-4 bg-card-bg rounded-[40px] hover:-rotate-3 transition-transform duration-500">
+                <div className="relative z-10 p-4 bg-card-bg rounded-[40px] hover:-rotate-3 transition-transform duration-1000">
                     <img
                         src={hero}
                         alt="Noreta Books"

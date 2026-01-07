@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NavIcon from "../atoms/NavIcon.jsx";
 import NavTabs from "../molecules/NavTabs.jsx";
-import { menuIcon, shoppingIcon } from "../../utils/constants.js";
+import {ShoppingBag, Menu} from "lucide-react"
 import LogoWord from "../atoms/LogoWord.jsx";
 import SecDivider from "../atoms/SecDivider.jsx";
 import { useCart } from "../../hooks/useCart.jsx";
@@ -12,7 +12,7 @@ function Navbar() {
   const { toggleCart, itemCount } = useCart();
 
   return (
-    <nav className="px-8 py-4 flex justify-between items-center text-accent-dark bg-white mb-5 fixed top-0 right-0 left-0 z-50">
+    <nav className="px-8 py-4 flex justify-between items-center text-main-text bg-white/85 backdrop-blur-sm mb-5 fixed top-0 right-0 left-0 z-50">
       {/*Navbar LogoWord */}
       <LogoWord>نوريتا ستور</LogoWord>
 
@@ -21,15 +21,14 @@ function Navbar() {
 
       {/* Navbar Icons */}
       <div className="flex gap-4">
-        <NavIcon className={`relative`} onClick={toggleCart} src={shoppingIcon}>
-            {!itemCount || itemCount === 0 ? null :(<div
-                className="absolute bg-accent-dark-2 top-0 right-0 rounded-full w-[15px] h-[15px] text-black/85 font-medium text-[12px] flex items-center justify-center leading-none">
-                {itemCount}
-            </div>)}
+        <NavIcon className={`relative`} onClick={toggleCart} icon={<ShoppingBag/>}>
+            {!itemCount || itemCount === 0 ? null :(<span className="absolute -top-1 -right-1 bg-accent-dark/85 text-white rounded-full w-4 h-4 text-[10px] flex items-center justify-center font-bold">
+              {itemCount}
+            </span>)}
         </NavIcon>
         <NavIcon
           className="max-md:block hidden"
-          src={menuIcon}
+          icon={<Menu/>}
           onClick={() => setShowMenu((prev) => !prev)}
         />
       </div>

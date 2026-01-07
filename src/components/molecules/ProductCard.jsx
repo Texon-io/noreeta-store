@@ -18,9 +18,9 @@ function Card({ data, showModal, setData }) {
   } = data;
 
   return (
-    <div className="rounded-lg min-w-full bg-accent-main-light/10 min-h-[420px] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+    <div className="rounded-lg min-w-full bg-accent-main-light/10 min-h-[420px] shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
       <div
-        className="overflow-hidden rounded-t-lg min-w-[300px] min-h-[250px] w-full cursor-pointer"
+        className="overflow-hidden rounded-t-lg min-w-[300px] min-h-[250px] w-full cursor-pointer group"
         onClick={() => {
           setData(data);
           showModal((prev) => !prev);

@@ -1,12 +1,22 @@
 function CategoryList({ category, activeCategory, setActiveCategory }) {
-  return (
-    <li
-      onClick={() => setActiveCategory(category)}
-      className={`p-2 sm:px-3 rounded-lg cursor-pointer font-medium ${activeCategory === category ? "bg-accent-dark/90 text-white" : "bg-accent-main/20 hover:bg-accent-main/40"} transition-all duration-150 flex justify-center items-center`}
-    >
-      {category}
-    </li>
-  );
+    // تحديد هل العنصر ده هو المختار حالياً
+    const isActive = activeCategory === category;
+
+    return (
+        <li
+            onClick={() => setActiveCategory(category)}
+            className={`
+        list-none px-4 py-2 rounded-full cursor-pointer font-medium text-sm sm:text-base
+        transition-all duration-200 select-none flex justify-center items-center whitespace-nowrap
+        
+        ${isActive
+                ? "bg-accent-dark text-white shadow-md scale-105"
+                : "bg-gray-100 text-gray-600 hover:bg-accent-main/20 hover:text-accent-dark"}
+      `}
+        >
+            {category}
+        </li>
+    );
 }
 
 export default CategoryList;
