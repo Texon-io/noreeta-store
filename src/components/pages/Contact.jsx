@@ -35,7 +35,7 @@ function Contact() {
       >
         {/* Contact Info Section */}
         <div className="space-y-6">
-          <LogoWord className="text-main-text text-2xl">
+          <LogoWord font={"font-zain"} className="text-main-text text-2xl">
             معلومات التواصل
           </LogoWord>
 

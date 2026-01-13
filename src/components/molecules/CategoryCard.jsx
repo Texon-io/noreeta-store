@@ -11,7 +11,7 @@ function CategoryCard({ imgPath, to, children }) {
         to={to}
         className="overlay bg-black/60 hover:bg-black/75 transition-all duration-300 ease-linear w-full h-full flex items-center justify-center"
       >
-        <h4 className="font-reqaa text-secondary-text-light text-5xl shadow-2xl">
+        <h4 className="noto text-secondary-text-light text-5xl shadow-2xl">
           {children}
         </h4>
       </Link>

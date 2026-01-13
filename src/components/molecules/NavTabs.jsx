@@ -1,88 +1,85 @@
 import { NavLink } from "react-router";
+import { createPortal } from "react-dom"; // استيراد بورتال
 
-// Nav items for dynamic loading
 const links = [
-  { path: "/", label: "الرئيسية" },
-  { path: "/products", label: "المنتجات" },
-  { path: "/contact", label: "تواصل معنا" },
+    { path: "/", label: "الرئيسية" },
+    { path: "/products", label: "المنتجات" },
+    { path: "/contact", label: "تواصل معنا" },
 ];
 
 function NavTabs({ variant = "horizontal", isOpen, onClose }) {
-  /*
-   * this code logic always render navbar tabs
-   * if we pass variant as horizontal, so it rendered at normal tabs
-   * but if we pass it as vertical , so it rendered as sidebar menu for responsive design
-   *
-   * */
 
-  if (variant === "sidebar") {
-    return (
-      <>
-        {/* Overlay as background*/}
-        <div
-          className={`fixed inset-0 bg-black/30 transition-opacity duration-300 z-[100] ${
-            isOpen ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-          onClick={onClose}
-        ></div>
+    if (variant === "sidebar") {
+        // نستخدم البورتال لنقل السايد بار لآخر الصفحة في الـ DOM
+        return createPortal(
+            <>
+                {/* Overlay */}
+                <div
+                    onClick={onClose}
+                    className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
+                        isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+                    } z-[9998]`}
+                />
 
-        {/* Sliding Menu */}
-        <aside
-          className={`
-            fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out will-change-transform
-
-            ${isOpen ? "translate-x-0" : "translate-x-full"}
-            z-50 p-6 flex flex-col gap-6
-          `}
-        >
-          <button
-            onClick={onClose}
-            className="self-end text-xl font-bold mb-4 cursor-pointer main-hover"
-          >
-            &times;
-          </button>
-
-          <ul className="flex flex-col gap-6">
-            {links.map((link) => (
-              <li key={link.path}>
-                <NavLink
-                  to={link.path}
-                  onClick={onClose}
-                  className={({ isActive }) =>
-                    `transition-all duration-150 text-accent-dark-2 ${
-                      isActive ? "font-semibold text-accent-dark-2" : ""
-                    }`
-                  }
+                {/* Sliding Menu */}
+                <aside
+                    className={`
+                        fixed top-0 right-0 h-full w-72 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out
+                        ${isOpen ? "translate-x-0" : "translate-x-full"}
+                        z-[9999] p-8 flex flex-col gap-8
+                    `}
                 >
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </aside>
-      </>
-    );
-  }
+                    <button
+                        onClick={onClose}
+                        className="self-end text-3xl font-light mb-4 cursor-pointer hover:text-red-500 transition-colors"
+                    >
+                        &times;
+                    </button>
 
-  // horizontal mode
-  return (
-    <ul className="nav-links flex justify-evenly gap-10 text-shadow-2xs max-md:hidden">
-      {links.map((link) => (
-        <li key={link.path}>
-          <NavLink
-            to={link.path}
-            className={({ isActive }) =>
-              `text-accent-dark-2 transition-all duration-150 ${
-                isActive ? "font-semibold text-accent-dark-2`" : ""
-              }`
-            }
-          >
-            {link.label}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  );
+                    <ul className="flex flex-col gap-8 text-right font-zain">
+                        {links.map((link) => (
+                            <li key={link.path}>
+                                <NavLink
+                                    to={link.path}
+                                    onClick={onClose}
+                                    className={({ isActive }) =>
+                                        `text-xl transition-all duration-300 block ${
+                                            isActive
+                                                ? "font-bold text-accent-main pr-4 border-r-4 border-accent-main"
+                                                : "text-gray-600 hover:pr-4"
+                                        }`
+                                    }
+                                >
+                                    {link.label}
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                </aside>
+            </>,
+            document.body // هنا بنقوله ارمي الكود ده في الـ body مباشرة
+        );
+    }
+
+    // الـ Horizontal يفضل مكانه عادي جوا الناف بار
+    return (
+        <ul className="flex items-center gap-8 max-md:hidden font-zain">
+            {links.map((link) => (
+                <li key={link.path}>
+                    <NavLink
+                        to={link.path}
+                        className={({ isActive }) =>
+                            `text-lg transition-all duration-300 hover:text-accent-main ${
+                                isActive ? "font-bold text-accent-main border-b-2 border-accent-main" : "text-main-text"
+                            }`
+                        }
+                    >
+                        {link.label}
+                    </NavLink>
+                </li>
+            ))}
+        </ul>
+    );
 }
 
 export default NavTabs;
