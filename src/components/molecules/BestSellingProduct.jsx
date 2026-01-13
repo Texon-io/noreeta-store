@@ -29,12 +29,12 @@ export default function BestSellingProduct({
       <BestSellingImg image={image} name={name} />
 
       {/* Name and Price */}
-      <div className="mt-3">
+      <div className="mt-3 flex flex-col gap-2">
         <h3 className="font-semibold text-accent-dark text-lg font-zain text-start">
           {name}
         </h3>
 
-        <p className="p-2 text-base font-medium  text-start">
+        <p className="text-base font-medium  text-start line-clamp-2">
           {description}
         </p>
 
@@ -47,7 +47,7 @@ export default function BestSellingProduct({
       <Button
         variant="main"
         size="sm"
-        className="mt-4 w-full"
+        className={`mt-4 w-full`}
         onClick={handleAdd}
       >
         {" "}

@@ -1,6 +1,6 @@
 function BestSellingImg({ image, name }) {
   return (
-    <figure className="w-full h-56 rounded-lg overflow-hidden">
+    <figure className="w-full h-72 md:h-56 rounded-lg overflow-hidden">
       <img
         src={image ? image : "/images/product-placeholder.png"}
         alt={name}

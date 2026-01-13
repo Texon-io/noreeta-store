@@ -3,7 +3,7 @@ import {Link} from "react-router";
 
 const Hero = () => {
     return (
-        <section className="relative flex flex-col-reverse lg:flex-row items-center justify-between px-6 lg:px-24 py-16 lg:py-24 min-h-[85vh] gap-12 bg-white overflow-hidden">
+        <section className="relative flex flex-col md:flex-row items-center justify-between px-6 lg:px-24 pb-0 pt-32 md:py-24 min-h-[85vh] gap-12 bg-white overflow-hidden">
 
             {/* Content Side */}
             <div className="flex-1 text-right">
@@ -39,7 +39,7 @@ const Hero = () => {
                 {/* الدائرة اللي ورا الصورة بستايل نوريتا */}
                 <div className="absolute w-72 h-72 lg:w-[450px] lg:h-[450px] rounded-full bg-secondary/30 blur-3xl"></div>
 
-                <div className="relative z-10 p-4 bg-card-bg rounded-[40px] hover:-rotate-3 transition-transform duration-1000">
+                <div className="relative z-10 p-4 bg-card-bg rounded-[40px] hover:-rotate-3 transition-transform duration-1000 max-md:hidden">
                     <img
                         src={hero}
                         alt="Noreta Books"

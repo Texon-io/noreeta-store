@@ -20,7 +20,7 @@ function NavTabs({ variant = "horizontal", isOpen, onClose }) {
       <>
         {/* Overlay as background*/}
         <div
-          className={`fixed inset-0 bg-black/30 transition-opacity duration-300 z-40 ${
+          className={`fixed inset-0 bg-black/30 transition-opacity duration-300 z-[100] ${
             isOpen ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
           onClick={onClose}
