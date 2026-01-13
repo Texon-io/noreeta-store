@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router";
+import { useEffect, useState } from "react";
+import {Routes, Route, useLocation} from "react-router";
 import Navbar from "./components/organisms/Navbar.jsx";
 import Footer from "./components/organisms/Footer.jsx";
 import Cart from "./components/pages/Cart.jsx";
@@ -9,28 +10,38 @@ import Contact from "./components/pages/Contact.jsx";
 import Products from "./components/pages/Products.jsx";
 import ScrollToTop from "./utils/ScrollToTop.jsx";
 import SplashScreen from "./components/atoms/SplashScreen.jsx";
-import { useEffect, useState } from "react";
+import AdminDashboard from "./components/pages/AdminDashboard.jsx";
 
-function App() {
+export default function App() {
     const [showSplash, setShowSplash] = useState(true);
+    const location = useLocation() // عشان نعرف إحنا في أنهي صفحة دلوقتي
 
     useEffect(() => {
         document.title = "Noreta Store";
-
-        const timer = setTimeout(() => setShowSplash(false), 5000); // 5 ثواني
+        const timer = setTimeout(() => setShowSplash(false), 5000);
         return () => clearTimeout(timer);
     }, []);
 
+    // بنفحص هل إحنا في صفحة الأدمن ولا لأ
+    const isAdminPage = location.pathname.startsWith("/admin");
+
+    if (showSplash) return <SplashScreen />;
+
     return (
         <>
-            {showSplash && <SplashScreen />}
+            <Toaster dir={'rtl'} richColors position="top-right" />
+            <ScrollToTop />
 
-
+            {isAdminPage ? (
+                /* --- لوحة تحكم الأدمن (بدون Navbar و Footer) --- */
+                <Routes>
+                    <Route path="/admin" element={<AdminDashboard />} />
+                </Routes>
+            ) : (
+                /* --- تصميم الموقع العادي للزبائن --- */
                 <>
                     <Navbar />
-                    <ScrollToTop />
                     <main>
-                        <Toaster dir={'rtl'} richColors position="top-right" />
                         <Routes>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/products" element={<Products />} />
@@ -40,8 +51,7 @@ function App() {
                     <Cart />
                     <Footer />
                 </>
+            )}
         </>
     );
 }
-
-export default App;
