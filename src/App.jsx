@@ -25,7 +25,7 @@ export default function App() {
     // بنفحص هل إحنا في صفحة الأدمن ولا لأ
     const isAdminPage = location.pathname.startsWith("/admin");
 
-    if (showSplash) return <SplashScreen />;
+    if (showSplash && !isAdminPage) return <SplashScreen />;
 
     return (
         <>
@@ -33,12 +33,10 @@ export default function App() {
             <ScrollToTop />
 
             {isAdminPage ? (
-                /* --- لوحة تحكم الأدمن (بدون Navbar و Footer) --- */
                 <Routes>
                     <Route path="/admin" element={<AdminDashboard />} />
                 </Routes>
             ) : (
-                /* --- تصميم الموقع العادي للزبائن --- */
                 <>
                     <Navbar />
                     <main>

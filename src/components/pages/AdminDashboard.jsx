@@ -1,9 +1,12 @@
-import { Toaster, toast } from "sonner";
+import {toast } from "sonner";
 import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 import useAddProduct from "../../hooks/useAddProduct";
 import CategorySelect from "../organisms/CategoriesSelect.jsx";
+import CustomInput from "../atoms/CustomInput.jsx";
+import ImageUploader from "../atoms/ImageUploader.jsx";
+import AdminLogin from "../organisms/AdminLogin.jsx";
 import Label from "../atoms/Label.jsx";
 
 
@@ -128,7 +131,7 @@ export default function AdminDashboard() {
         if (passInput === ADMIN_PASSWORD) {
             setIsAdmin(true);
             setAttempts(0);
-            toast.success("Welcome, Admin!");
+            toast.success("مرحبا مرة أخرى!");
         } else {
             setPassInput("");
             const newAttempts = attempts + 1;
@@ -199,222 +202,70 @@ export default function AdminDashboard() {
 
         // 3. Use mutateAsync instead of calling uploadProductLogic directly
         toast.promise(addProductMutation.mutateAsync(formDataValues), {
-            loading: "Processing product data...",
+            loading: "جاري إرسال المنتج...",
             success: () => {
                 setImagePreview(null);
                 setSelectedFile(null);
                 setBestSeller(false);
                 setCategory("");
                 form.reset();
-                return "Product added successfully! 🎉";
+                return "تم إضافة المنتج بنجاح ! 🎉";
             },
             error: (err) => `${err.message}`,
         });
     };
 
-    if (!isAdmin) {
-        return (
-            <div
-                dir="ltr"
-                className="min-h-screen bg-slate-900 flex items-center justify-center p-6 font-almarai"
-            >
-                <Toaster position="top-center" richColors />
-                <div className="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md border border-gray-100 animate-in fade-in zoom-in duration-300">
-                    <div className="text-center mb-6">
-                        <h2 className="text-2xl font-bold text-gray-800">Admin Login</h2>
-                        <p className="text-gray-500 mt-2 text-sm">
-                            Please enter the admin password to access the dashboard.
-                        </p>
-                    </div>
+    // AdminPanel.jsx
 
-                    <form onSubmit={handleLogin} className="space-y-4">
-                        <input
-                            type="password"
-                            value={passInput}
-                            disabled={isLocked}
-                            onChange={(e) => setPassInput(e.target.value)}
-                            placeholder={isLocked ? "Try again later" : "Enter password"}
-                            className={`w-full px-4 py-3 rounded-xl border transition-colors duration-300 ${
-                                isLocked ? "bg-gray-100" : "border-gray-200"
-                            } focus:ring-2 focus:ring-accent-main outline-none text-center`}
-                            required
-                        />
-
-                        <button
-                            disabled={isLocked}
-                            className={`w-full py-3 rounded-xl font-bold transition-all ${
-                                isLocked
-                                    ? "bg-gray-400  text-gray-200 cursor-not-allowed"
-                                    : "bg-green-600 hover:bg-green-700 text-white cursor-pointer"
-                            }`}
-                        >
-                            {isLocked
-                                ? `Try again later in ${formatTime(timeLeft)}`
-                                : "Login"}
-                        </button>
-
-                        {isLocked && (
-                            <p className="text-red-500 text-sm text-center font-medium animate-pulse">
-                                ⚠️ You have been locked out due to multiple failed attempts.
-                            </p>
-                        )}
-                    </form>
-                </div>
-            </div>
-        );
-    }
+    if (!isAdmin) return <AdminLogin {...{ passInput, setPassInput, isLocked, timeLeft, handleLogin, formatTime }} />;
 
     return (
-        <div
-            dir="rtl"
-            className="min-h-screen bg-[#f8fafc] flex flex-col items-center justify-center p-6  text-right relative font-almarai"
-        >
-            <button
-                onClick={handleLogout}
-                className="absolute top-4 left-4 cursor-pointer text-sm bg-red-50 text-red-500 px-4 py-2 rounded-xl hover:bg-red-100 transition-colors border border-red-100 font-bold"
-            >
+        <div dir="rtl" className="min-h-screen bg-[#FFF5F8] flex flex-col items-center py-12 px-6 font-zain">
+            <button onClick={handleLogout} className="absolute top-6 left-6 cursor-pointer text-[#D65A84] bg-white border border-[#FFD1E0] px-5 py-2 rounded-2xl font-bold shadow-sm hover:bg-[#D65A84] hover:text-white transition-all">
                 تسجيل خروج
             </button>
 
-            <div className="w-full max-w-2xl bg-white rounded-3xl mt-10 shadow-xl overflow-hidden border border-gray-100">
-                <div className="bg-linear-to-r from-accent-dark-2/80 to-accent-dark-2 p-6 text-white text-center">
-                    <h1 className="text-2xl font-bold">إضافة منتج جديد</h1>
+            <div className="w-full max-w-3xl bg-white rounded-[3rem] shadow-xl overflow-hidden border border-[#E0FAF5]">
+                <div className="bg-gradient-to-r from-[#4FB6A1] to-[#86F2DB] p-8 text-white text-center">
+                    <h1 className="text-3xl font-bold">إضافة منتج جديد ✨</h1>
                 </div>
 
-                <form ref={formRef} onSubmit={handleSubmit} className="p-8 space-y-5">
-                    <div className="space-y-1">
-                        <Label>اسم المنتج</Label>
-                        <input
-                            name="name"
-                            required
-                            className="w-full px-4 py-3 rounded-xl border transition-colors duration-300 border-gray-200 focus:ring-2 focus:ring-accent-main outline-none"
-                            placeholder="مثال: دفتر ملاحظات"
-                        />
-                    </div>
+                <form ref={formRef} onSubmit={handleSubmit} className="p-10 space-y-6">
+                    <CustomInput label="اسم المنتج" name="name" required placeholder="مثال: نوت بوك نوريتا" />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                            <Label>السعر (EGP)</Label>
-                            <input
-                                name="price"
-                                type="number"
-                                required
-                                className="w-full px-4 py-3 rounded-xl border transition-colors duration-300 border-gray-200 focus:ring-2 focus:ring-accent-main outline-none"
-                                placeholder="0.00"
-                            />
-                        </div>
-                        <div className="space-y-1">
-                            <Label>الكمية</Label>
-                            <input
-                                name="stock"
-                                type="number"
-                                required
-                                className="w-full px-4 py-3 rounded-xl border transition-colors duration-300 border-gray-200 focus:ring-2 focus:ring-accent-main outline-none"
-                                placeholder="10"
-                            />
+                        <CustomInput label="السعر (EGP)" name="price" type="number" required placeholder="0.00" />
+                        <CustomInput label="الكمية" name="stock" type="number" required placeholder="10" />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-[#2D2D2D] font-bold mr-2">تصنيف المنتج</Label>
+                        <div className="p-1 bg-[#FFF5F8] rounded-2xl border border-[#FFD1E0]">
+                            <CategorySelect value={category} onChange={setCategory} />
                         </div>
                     </div>
 
-                    <div className="space-y-1 text-right">
-                        <Label>تصنيف المنتج</Label>
-                        <CategorySelect value={category} onChange={setCategory} />
+                    <div className="space-y-2">
+                        <Label className="text-[#2D2D2D] font-bold mr-2">وصف المنتج</Label>
+                        <textarea placeholder={`تفاصيل المنتج...`} name="description" rows="3" className="w-full px-6 py-4 rounded-2xl border border-[#E0FAF5] bg-[#E0FAF5]/20 focus:ring-2 focus:ring-[#4FB6A1] outline-none resize-none" />
                     </div>
 
-                    <div className="space-y-1">
-                        <Label>وصف المنتج</Label>
-                        <textarea
-                            name="description"
-                            rows="2"
-                            className="w-full px-4 py-3 rounded-xl border transition-colors duration-300 border-gray-200 focus:ring-2 focus:ring-accent-main outline-none resize-none"
-                            placeholder="اكتب تفاصيل المنتج..."
-                        />
-                    </div>
-
-                    <Label className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
-                        <input
-                            type="checkbox"
-                            checked={bestSeller}
-                            onChange={(e) => setBestSeller(e.target.checked)}
-                            className="w-5 h-5 accent-green-600 rounded"
-                        />
-                        <span className="text-sm font-bold text-gray-700">
-              تمييز المنتج كـ "أكثر مبيعاً"
-            </span>
+                    <Label className="flex items-center gap-4 p-5 rounded-3xl border border-[#FFD1E0] bg-[#FFF5F8] cursor-pointer">
+                        <input type="checkbox" checked={bestSeller} onChange={(e) => setBestSeller(e.target.checked)} className="w-6 h-6 accent-[#F781A8]" />
+                        <span className="font-bold text-[#D65A84]">تمييز المنتج كـ "أكثر مبيعاً" 🔥</span>
                     </Label>
 
-                    <div className="space-y-1">
-                        <Label>صورة المنتج</Label>
-                        <div
-                            className={`mt-2 border-2 border-dashed rounded-2xl p-4 transition-colors ${
-                                imagePreview
-                                    ? "border-green-500 bg-green-50"
-                                    : "border-gray-300 bg-gray-50"
-                            }`}
-                        >
-                            {imagePreview ? (
-                                <div className="relative w-full h-48 rounded-lg overflow-hidden flex justify-center">
-                                    <img
-                                        src={imagePreview}
-                                        alt="Preview"
-                                        className="h-full object-contain"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            setImagePreview(null);
-                                            setSelectedFile(null);
-                                        }}
-                                        className="absolute top-0 right-0 bg-red-500 text-white w-8 h-8 rounded-full shadow-lg flex items-center justify-center hover:bg-red-600"
-                                    >
-                                        ✕
-                                    </button>
-                                </div>
-                            ) : (
-                                <Label className="cursor-pointer flex flex-col items-center justify-center py-4">
-                                    <div className="bg-white p-3 rounded-full shadow-sm mb-2 text-gray-400">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-8 w-8"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M12 4v16m8-8H4"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <span className="text-sm text-gray-500 font-medium">
-                    اضغط لاختيار صورة
-                  </span>
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        className="hidden"
-                                        onChange={handleImageChange}
-                                    />
-                                </Label>
-                            )}
-                        </div>
-                    </div>
+                    <ImageUploader
+                        preview={imagePreview}
+                        onImageChange={handleImageChange}
+                        onClear={() => { setImagePreview(null); setSelectedFile(null); }}
+                    />
 
-                    <button
-                        disabled={loading}
-                        className={`w-full py-4 rounded-2xl cursor-pointer font-bold text-lg transition-all transform active:scale-[0.98] shadow-lg ${
-                            loading
-                                ? "bg-gray-400 cursor-not-allowed text-gray-100"
-                                : "bg-green-600 hover:bg-green-700 text-white shadow-green-100"
-                        }`}
-                    >
-                        {loading ? "جاري المعالجة..." : "إضافة المنتج الآن"}
+                    <button disabled={loading} className="w-full cursor-pointer py-5 rounded-[2rem] font-bold text-xl bg-gradient-to-r from-[#F781A8] to-[#D65A84] text-white shadow-lg active:scale-95 transition-all">
+                        {loading ? "جاري الحفظ..." : "إضافة المنتج الآن ✨"}
                     </button>
                 </form>
             </div>
         </div>
     );
-}
-
-
+};
