@@ -16,21 +16,15 @@ import useAllProducts from "../../hooks/useAllProducts.js";
 
 const ALL_CATEGORIES = [
     "دفاتر",
-    "أقلام",
-    "شنط",
-    "مجات",
-    "منظمات مكتب",
+    "أدوات مكتبية",
     "باكيدچات أو بوكسات",
     "أخرى",
 ];
 
 const map = {
     notes: "دفاتر",
-    pens: "أقلام",
-    bags: "شنط",
-    mugs: "مجات",
     boxs: "باكيدچات أو بوكسات",
-    "office-organizers": "منظمات مكتب",
+    stationery: "أدوات مكتبية",
     others: "أخرى",
 };
 
@@ -52,11 +46,8 @@ function Products() {
         // To update both state and URL param
         const reverseMap = {
             دفاتر: "notes",
-            أقلام: "pens",
-            شنط: "bags",
-            مجات: "mugs",
+            "أدوات مكتبية": "stationery",
             "باكيدچات أو بوكسات": "boxs",
-            "منظمات مكتب": "office-organizers",
             أخرى: "others",
             الكل: "", // If "الكل", no param
         };

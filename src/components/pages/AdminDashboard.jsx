@@ -67,7 +67,7 @@ export default function AdminDashboard() {
      */
     const uploadProductLogic = async (formDataValues) => {
         if (!selectedFile) throw new Error("Please select a product image");
-        if (!formDataValues.Category)
+        if (!formDataValues.category)
             throw new Error("Please select a product category");
 
         // 1. Upload assets to Cloudinary
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
         // then parse it as JSON on the server side.
         const productData = {
             ...formDataValues,
-            ImageURL: cloudJson.secure_url,
+            image: cloudJson.secure_url,
             timestamp: new Date().toLocaleString("ar-EG"),
         };
 
@@ -192,12 +192,12 @@ export default function AdminDashboard() {
 
         const form = e.target;
         const formDataValues = {
-            Name: form.name.value,
-            Price: form.price.value,
-            Stock: form.stock.value,
-            Category: category,
-            Description: form.description.value,
-            BestSeller: bestSeller,
+            name: form.name.value,
+            price: form.price.value,
+            stock: form.stock.value,
+            category: category,
+            description: form.description.value,
+            bestSeller: bestSeller,
         };
 
         console.log("📝 Initial Form Data:", formDataValues);

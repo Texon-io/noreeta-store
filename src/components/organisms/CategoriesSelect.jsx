@@ -23,44 +23,14 @@ const categories = [
         icon: BookOpen,
     },
     {
-        label: "أقلام",
-        value: "أقلام",
+        label: "أدوات مكتبية",
+        value: "أدوات مكتبية",
         colors: {
             txt: "text-blue-600",
             bg: "bg-blue-100",
             bgHover: "hover:bg-blue-200",
         },
         icon: PenTool,
-    },
-    {
-        label: "منظم مكتب",
-        value: "منظم مكتب",
-        colors: {
-            txt: "text-yellow-600",
-            bg: "bg-yellow-100",
-            bgHover: "hover:bg-yellow-200",
-        },
-        icon: LayoutGrid,
-    },
-    {
-        label: "مجات",
-        value: "مجات",
-        colors: {
-            txt: "text-green-600",
-            bg: "bg-green-100",
-            bgHover: "hover:bg-green-200",
-        },
-        icon: Coffee,
-    },
-    {
-        label: "شنط",
-        value: "شنط",
-        colors: {
-            txt: "text-orange-600",
-            bg: "bg-orange-100",
-            bgHover: "hover:bg-orange-200",
-        },
-        icon: Briefcase,
     },
     {
         label: "بوكسات",

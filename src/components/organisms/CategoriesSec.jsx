@@ -12,11 +12,11 @@ function CategoriesSec() {
             gridClass: "md:col-span-2 md:row-span-2 min-h-[380px]",
         },
         {
-            id: "pens",
-            title: "أقلام",
-            subtitle: "دوّني إبداعكِ",
+            id: "stationery",
+            title: "أدوات مكتبية",
+            subtitle: "كل ما يحتاجه مكتبك",
             imgPath: "/images/notebooks.png",
-            to: "/products?category=pens",
+            to: "/products?category=stationery",
             gridClass: "md:col-span-1 md:row-span-1 min-h-[180px]",
         },
         {
