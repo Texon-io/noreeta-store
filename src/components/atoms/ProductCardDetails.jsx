@@ -2,14 +2,14 @@ import Button from "./Button.jsx";
 import { useState } from "react";
 
 const ProductCardDetails = ({
-                                id,
-                                name,
-                                description,
-                                image,
-                                price,
-                                stock,
-                                onAddToCart,
-                            }) => {
+    id,
+    name,
+    description,
+    image,
+    price,
+    stock,
+    onAddToCart,
+}) => {
     const [isAdded, setIsAdded] = useState(false);
 
     function handleClick() {
@@ -51,11 +51,10 @@ const ProductCardDetails = ({
             {/* Add to Cart Button */}
             <Button
                 onClick={handleClick}
-                className={`w-full mx-0 mt-3 transition-all duration-300 ${
-                    isAdded ? "bg-green-600 border-green-600 hover:bg-green-700" : ""
-                }`}
+                className={`w-full mx-0 mt-3 transition-all duration-300 ${stock === 0 ? "cursor-not-allowed" : ""} ${isAdded ? "bg-green-600 border-green-600 hover:bg-green-700" : ""
+                    }`}
                 size="sm"
-                disabled={isAdded}
+                disabled={isAdded || stock === 0}
             >
                 <div className="flex items-center justify-center gap-2">
                     {isAdded && <span>✓</span>}

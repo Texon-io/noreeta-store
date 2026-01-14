@@ -27,7 +27,7 @@ function Card({ data, showModal, setData }) {
         }}
       >
         <img
-          className="w-full h-[250px] object-cover transition-transform duration-500 hover:scale-105"
+          className={`w-full h-[250px] object-cover transition-transform duration-500 hover:scale-105 ${stock === 0 ? "grayscale-100" : ""}`}
           src={image || tempImg}
           alt={`${category}: ${name}`}
         />
