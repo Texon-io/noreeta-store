@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     BookOpen,
     PenTool,
@@ -33,8 +33,8 @@ const categories = [
         icon: PenTool,
     },
     {
-        label: "منظمات مكتب",
-        value: "منظمات مكتب",
+        label: "منظم مكتب",
+        value: "منظم مكتب",
         colors: {
             txt: "text-yellow-600",
             bg: "bg-yellow-100",
@@ -64,7 +64,7 @@ const categories = [
     },
     {
         label: "بوكسات",
-        value: "بوكسات",
+        value: "باكيدچات أو بوكسات",
         colors: {
             txt: "text-red-600",
             bg: "bg-red-100",
@@ -109,19 +109,17 @@ export default function CategorySelect({ value, onChange }) {
             ref={containerRef}
             className="relative flex items-center gap-4 p-2 rounded-xl border border-gray-200 bg-gray-50"
         >
-      <span className="text-base font-semibold text-gray-700 whitespace-nowrap mr-2">
-        القسم:
-      </span>
+            <span className="text-base font-semibold text-gray-700 whitespace-nowrap mr-2">
+                القسم:
+            </span>
             <button
                 type="button"
                 onClick={() => setOpen(!open)}
-                className={`flex-1 flex items-center cursor-pointer justify-between gap-3 py-2 px-4 rounded-xl ${
-                    selected?.colors?.bg ? selected?.colors?.bg : "bg-gray-100"
-                } ${
-                    selected?.colors?.bgHover
+                className={`flex-1 flex items-center cursor-pointer justify-between gap-3 py-2 px-4 rounded-xl ${selected?.colors?.bg ? selected?.colors?.bg : "bg-gray-100"
+                    } ${selected?.colors?.bgHover
                         ? selected?.colors?.bgHover
                         : "hover:bg-gray-200"
-                } transition-colors`}
+                    } transition-colors`}
             >
                 {selected ? (
                     <div className={`flex items-center gap-2 ${selected?.colors?.txt}`}>
@@ -133,9 +131,8 @@ export default function CategorySelect({ value, onChange }) {
                 )}
                 <ChevronDown
                     size={18}
-                    className={`transition-transform duration-200 ${
-                        open ? "rotate-180" : ""
-                    }`}
+                    className={`transition-transform duration-200 ${open ? "rotate-180" : ""
+                        }`}
                 />
             </button>
 

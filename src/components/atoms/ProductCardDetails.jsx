@@ -43,7 +43,7 @@ const ProductCardDetails = ({
                     <span className="text-sm font-medium text-gray-400">ج.م</span>
                 </div>
 
-                <div className="card-stock px-2 py-1 bg-gray-50 rounded-md border border-gray-100 font-medium text-xs text-gray-500">
+                <div className="card-stock px-2 py-1 bg-accent-main/30 rounded-md border border-gray-100 font-medium text-xs text-gray-500">
                     المخزون: <span className="text-main-text">{stock}</span>
                 </div>
             </div>

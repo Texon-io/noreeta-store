@@ -1,4 +1,4 @@
-import {toast } from "sonner";
+import { toast } from "sonner";
 import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
@@ -67,7 +67,7 @@ export default function AdminDashboard() {
      */
     const uploadProductLogic = async (formDataValues) => {
         if (!selectedFile) throw new Error("Please select a product image");
-        if (!formDataValues.category)
+        if (!formDataValues.Category)
             throw new Error("Please select a product category");
 
         // 1. Upload assets to Cloudinary
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
         // then parse it as JSON on the server side.
         const productData = {
             ...formDataValues,
-            image: cloudJson.secure_url,
+            ImageURL: cloudJson.secure_url,
             timestamp: new Date().toLocaleString("ar-EG"),
         };
 
@@ -192,13 +192,15 @@ export default function AdminDashboard() {
 
         const form = e.target;
         const formDataValues = {
-            name: form.name.value,
-            price: form.price.value,
-            stock: form.stock.value,
-            category: category,
-            description: form.description.value,
-            bestSeller: bestSeller,
+            Name: form.name.value,
+            Price: form.price.value,
+            Stock: form.stock.value,
+            Category: category,
+            Description: form.description.value,
+            BestSeller: bestSeller,
         };
+
+        console.log("📝 Initial Form Data:", formDataValues);
 
         // 3. Use mutateAsync instead of calling uploadProductLogic directly
         toast.promise(addProductMutation.mutateAsync(formDataValues), {

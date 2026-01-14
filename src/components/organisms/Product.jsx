@@ -6,7 +6,7 @@ import { useState } from "react";
 import { X } from "lucide-react"; // شكل أنضف للإغلاق
 
 function Product({ showModal, data }) {
-    const { ImageURL: image, Name: name, Description: desc, Price: price, Stock: stock, id } = data;
+    const { image, name, description: desc, price, stock, id } = data;
     const { addToCart } = useCart();
     const tempImg = placeHolder;
     const [isAdded, setIsAdded] = useState(false);
@@ -71,9 +71,8 @@ function Product({ showModal, data }) {
                             <span className="text-2xl md:text-3xl font-bold text-accent-dark">
                                 {price} ج.م
                             </span>
-                            <span className={`text-[12px] px-3 py-1 rounded-full ${
-                                stock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                            }`}>
+                            <span className={`text-[12px] px-3 py-1 rounded-full ${stock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                                }`}>
                                 {stock > 0 ? `متوفر: ${stock}` : "نفذت الكمية"}
                             </span>
                         </div>
@@ -83,9 +82,8 @@ function Product({ showModal, data }) {
                     <div className="mt-8 md:mt-auto">
                         <Button
                             onClick={handleAddToCart}
-                            className={`w-full py-3 md:py-4 text-lg md:text-xl shadow-lg transition-all duration-300 flex items-center justify-center gap-2 ${
-                                isAdded ? "bg-green-600 border-green-600" : "bg-accent-dark hover:bg-accent-main"
-                            }`}
+                            className={`w-full py-3 md:py-4 text-lg md:text-xl shadow-lg transition-all duration-300 flex items-center justify-center gap-2 ${isAdded ? "bg-green-600 border-green-600" : "bg-accent-dark hover:bg-accent-main"
+                                }`}
                             disabled={stock <= 0 || isAdded}
                         >
                             {isAdded ? (

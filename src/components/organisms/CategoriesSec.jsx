@@ -4,30 +4,27 @@ import CategoryCard from "../molecules/CategoryCard";
 function CategoriesSec() {
     const categories = [
         {
-            id: "books",
-            title: "روايات وقصص",
+            id: "notes",
+            title: "دفاتر و نوتات",
             subtitle: "عوالم لا نهائية",
             imgPath: "/images/gifts.png",
-            to: "/products?category=gifts",
-            // واخد عمودين وارتفاع صفين (مربع كبير)
+            to: "/products?category=notes",
             gridClass: "md:col-span-2 md:row-span-2 min-h-[380px]",
         },
         {
-            id: "notes",
-            title: "دفاتر",
+            id: "pens",
+            title: "أقلام",
             subtitle: "دوّني إبداعكِ",
             imgPath: "/images/notebooks.png",
-            to: "/products?category=notes",
-            // واخد عمود وارتفاع صف (مربع صغير)
+            to: "/products?category=pens",
             gridClass: "md:col-span-1 md:row-span-1 min-h-[180px]",
         },
         {
-            id: "stationary",
-            title: "أدوات",
+            id: "boxs",
+            title: "بوكسات",
             subtitle: "لمسة فنية",
             imgPath: "/images/tools.png",
-            to: "/products?category=stationary",
-            // واخد عمود وارتفاع صف
+            to: "/products?category=boxs",
             gridClass: "md:col-span-1 md:row-span-1 min-h-[180px]",
         },
     ];

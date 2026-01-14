@@ -7,11 +7,11 @@ function BestSellingSec() {
   let bestSeller;
 
   // Fetching bestseller by the same API
-  const { data: products, isSuccess, error,isLoading } = useProducts();
+  const { data: products, isSuccess, error, isLoading } = useProducts();
 
   // on success assigning first 3 bestsellers products in variable
   if (isSuccess) {
-    bestSeller = products.filter((p) => p.BestSeller).slice(0, 4) || [];
+    bestSeller = products.filter((p) => p.BestSeller || p.bestSeller).slice(0, 4) || [];
   }
 
   // on error console this error
@@ -22,35 +22,35 @@ function BestSellingSec() {
       {/* Sec Title */}
       <SecHeading>منتجاتنا الأكثر مبيعاً</SecHeading>
 
-        {/* خط مزخرف تحت العنوان */}
-        <div className="flex justify-center items-center gap-2 mt-3">
-            <div className="w-20 h-[2px] bg-accent-main/30"></div>
-            <div className="w-2 h-2 rounded-full bg-accent-main"></div>
-            <div className="w-20 h-[2px] bg-accent-main/30"></div>
-        </div>
+      {/* خط مزخرف تحت العنوان */}
+      <div className="flex justify-center items-center gap-2 mt-3">
+        <div className="w-20 h-[2px] bg-accent-main/30"></div>
+        <div className="w-2 h-2 rounded-full bg-accent-main"></div>
+        <div className="w-20 h-[2px] bg-accent-main/30"></div>
+      </div>
 
       {/* Products Grid */}
       <div
         className="
           pt-6
           px-4
-      grid 
-      grid-cols-1 
-      sm:grid-cols-2 
-      lg:grid-cols-4 
-      gap-6
-    "
+          flex
+          flex-wrap
+          justify-center
+          gap-8
+        "
       >
         {bestSeller &&
           bestSeller.map((product) => (
-            <BestSellingProduct
-              key={product.id}
-              id={product.id}
-              name={product.Name}
-              price={product.Price}
-              image={product.ImageURL}
-              description={product.Description}
-            />
+            <div key={product.id} className="w-full sm:w-[45%] lg:w-[22%] min-w-[250px]">
+              <BestSellingProduct
+                id={product.id}
+                name={product.Name || product.name}
+                price={product.Price || product.price}
+                image={product.ImageURL || product.image}
+                description={product.Description || product.description}
+              />
+            </div>
           ))}
       </div>
     </section>
